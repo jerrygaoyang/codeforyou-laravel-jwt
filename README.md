@@ -46,7 +46,7 @@ return [
 ```
 
 
-### User Guide
+## User Guide
 
 ```
 use Codeforyou\Auth\JwtAuth;
@@ -65,7 +65,7 @@ $token = JwtAuth::token($user);
 
 ``` 
 {
-    "Authorization": "jwt PIe5T3xJWAMA95Uwf7pde7gmS7ZTiURg"
+    "Authorization": "jwt eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiaWF0IjoxNTM0MDUzNzQ4fQ.Hn8ZvcJyY0nu8s2fkVeRf3TYt4Up1HtGpIqoC9gLUjs"
 }	
 ```
 
@@ -85,4 +85,50 @@ $payload = JwtAuth::payload();
 $user = JwtAuth::user();
 
 $id = JwtAuth::id();
+```
+
+
+#### Exception (global for api)
+you can copy below code to your Laravel app/Exceptions/handler.php render function;
+
+it's easy to change the token exception for us;
+
+it's easy to change the return data for api response.
+
+of course, we should:
+```
+use Codeforyou\Auth\Exceptions\TokenExpireException;
+use Codeforyou\Auth\Exceptions\NoAuthorizationException;
+use Codeforyou\Auth\Exceptions\AuthModelException;
+use Codeforyou\Jwt\JwtException;
+
+
+if ($exception instanceof TokenExpireException) {
+    return response()->json([
+        'code' => $exception->getCode(),
+        'message' => $exception->getMessage(),
+        'data' => ''
+    ]);
+}
+if ($exception instanceof NoAuthorizationException) {
+    return response()->json([
+        'code' => $exception->getCode(),
+        'message' => $exception->getMessage(),
+        'data' => ''
+    ]);
+}
+if ($exception instanceof AuthModelException) {
+    return response()->json([
+        'code' => $exception->getCode(),
+        'message' => $exception->getMessage(),
+        'data' => ''
+    ]);
+}
+if ($exception instanceof JwtException) {
+    return response()->json([
+        'code' => $exception->getCode(),
+        'message' => $exception->getMessage(),
+        'data' => ''
+    ]);
+}
 ```
