@@ -27,12 +27,7 @@
 * JWT config in config/jwt.php 
 ```
 <?php
-/**
- * Created by PhpStorm.
- * User: gaoyang
- * Date: 2018/8/11
- * Time: 下午4:38
- */
+
 return [
     'secret' => substr(explode(':', env('APP_KEY'))[1], 0, 32),
 
@@ -43,6 +38,7 @@ return [
         'primary_key' => 'id'
     ]
 ];
+
 ```
 
 
