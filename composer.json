@@ -1,0 +1,21 @@
+{
+  "name": "codeforyou/laravel-jwt",
+  "description": "jwt auth for laravel",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "gaoyang",
+      "email": "917616767@qq.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.0.0",
+    "codeforyou/jwt": ">=1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Codeforyou\\Auth\\": "src/"
+    }
+  }
+}
