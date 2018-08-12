@@ -6,15 +6,21 @@
 
 * First: Require this package with composer using the following command
 
-> composer require codeforyou/laravel-jwt
+```
+composer require codeforyou/laravel-jwt
+```
 
 * Second: add the service provider to the providers array in config/app.php
 
-> Codeforyou\Auth\Providers\JwtProvider::class,
+```
+Codeforyou\Auth\Providers\JwtProvider::class,
+```
 
 * Last: publish jwt config to laravel config path
 
-> php artisan vendor:publish --provider="Codeforyou\Auth\Providers\JwtProvider"
+```
+php artisan vendor:publish --provider="Codeforyou\Auth\Providers\JwtProvider"
+```
 
 
 ## Configuration
@@ -22,7 +28,9 @@
 
 * add the JWT middleware to the routeMiddleware array in app/Http/Kenel.php
 
-> 'jwt' => \Codeforyou\Auth\Middleware\JWTMiddleware::class,
+```
+'jwt' => \Codeforyou\Auth\Middleware\JwtMiddleware::class,
+```
 
 * JWT config in config/jwt.php 
 ```

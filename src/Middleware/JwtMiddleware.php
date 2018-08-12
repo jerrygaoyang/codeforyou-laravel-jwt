@@ -16,7 +16,7 @@ use Codeforyou\Auth\Exceptions\NoAuthorizationException;
 use Codeforyou\Auth\JwtAuth;
 use Codeforyou\Auth\Exceptions\TokenExpireException;
 
-class JWTMiddleware
+class JwtMiddleware
 {
     public function handle($request, Closure $next)
     {
