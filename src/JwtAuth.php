@@ -13,7 +13,7 @@ use Codeforyou\Jwt\JWT;
 use Codeforyou\Auth\Exceptions\TokenExpireException;
 use Codeforyou\Auth\Exceptions\NoAuthorizationException;
 use Codeforyou\Auth\Exceptions\AuthModelException;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 
 class JwtAuth
 {
@@ -45,10 +45,7 @@ class JwtAuth
 
     public static function authorization()
     {
-        if (!$request->hasHeader('Authorization')) {
-            throw new NoAuthorizationException('no authorization');
-        }
-        $authorization = trim($request->header('Authorization'));
+        $authorization = Request::header('Authorization');
         $token = trim(substr($authorization, 4, strlen($authorization)));
         return $token;
     }
@@ -67,6 +64,13 @@ class JwtAuth
         $token = self::authorization();
         $payload = JWT::decode($token, config('jwt.secret'));
         return $payload['id'];
+    }
+
+    public static function payload()
+    {
+        $token = self::authorization();
+        $payload = JWT::decode($token, config('jwt.secret'));
+        return $payload;
     }
 
 }

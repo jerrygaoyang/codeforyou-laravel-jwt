@@ -10,7 +10,7 @@ namespace Codeforyou\Auth\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class JWTProvider extends ServiceProvider
+class JwtProvider extends ServiceProvider
 {
     public function boot()
     {

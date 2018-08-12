@@ -14,14 +14,22 @@ use Illuminate\Http\Request;
 use Codeforyou\Jwt\JWT;
 use Codeforyou\Auth\Exceptions\NoAuthorizationException;
 use Codeforyou\Auth\JwtAuth;
+use Codeforyou\Auth\Exceptions\TokenExpireException;
 
 class JWTMiddleware
 {
     public function handle($request, Closure $next)
     {
-        $token = JwtAuth::authorization();
-        $payload = JwtAuth::check($token);
-        $request->attributes->add(['jwt' => $payload]);
+        if (!$request->hasHeader('Authorization')) {
+            throw new NoAuthorizationException('no authorization');
+        }
+        $authorization = trim($request->header('Authorization'));
+        $arr = explode(' ', trim($authorization));
+        if (count($arr) != 2 || $arr[0] != 'jwt') {
+            throw new TokenExpireException('invalid token');
+        }
+        $token = trim(substr($authorization, 4, strlen($authorization)));
+        JwtAuth::check($token);
 
         return $next($request);
     }
